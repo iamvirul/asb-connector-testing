@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/admin" name="admin" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/createTopic">
+        <inSequence>
+            <asb.Administrator_createTopic configKey="test_admin">
+                <responseVariable>asb_Administrator_createTopic_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>admin_asb_test_topic</topicName>
+                <maxDeliveryCount></maxDeliveryCount>
+                <maxMessageSizeInKilobytes></maxMessageSizeInKilobytes>
+                <maxSizeInMegabytes></maxSizeInMegabytes>
+                <status>Unknown</status>
+                <userMetadata></userMetadata>
+                <enableBatchedOperations></enableBatchedOperations>
+                <deadLetteringOnMessageExpiration></deadLetteringOnMessageExpiration>
+                <requiresDuplicateDetection></requiresDuplicateDetection>
+                <enablePartitioning></enablePartitioning>
+                <requiresSession></requiresSession>
+                <supportOrdering></supportOrdering>
+            </asb.Administrator_createTopic>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+    <resource methods="GET" uri-template="/getTopic">
+        <inSequence>
+            <asb.Administrator_getTopic configKey="test_admin">
+                <responseVariable>asb_Administrator_getTopic_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>admin_asb_test_topic</topicName>
+            </asb.Administrator_getTopic>
+
+
+            <respond/>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+</api>
