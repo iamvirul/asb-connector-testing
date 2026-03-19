@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/admin" name="admin" xmlns="http://ws.apache.org/ns/synapse">
-    <resource methods="GET" uri-template="/createTopic">
+    <resource methods="POST" uri-template="/createTopic">
         <inSequence>
             <asb.Administrator_createTopic configKey="test_admin">
                 <responseVariable>asb_Administrator_createTopic_1</responseVariable>
                 <overwriteBody>true</overwriteBody>
                 <topicName>admin_asb_test_topic</topicName>
+                <autoDeleteOnIdle_seconds></autoDeleteOnIdle_seconds>
+                <autoDeleteOnIdle_nanoseconds></autoDeleteOnIdle_nanoseconds>
+                <defaultMessageTimeToLive_seconds></defaultMessageTimeToLive_seconds>
+                <defaultMessageTimeToLive_nanoseconds></defaultMessageTimeToLive_nanoseconds>
+                <duplicateDetectionHistoryTimeWindow_seconds></duplicateDetectionHistoryTimeWindow_seconds>
+                <duplicateDetectionHistoryTimeWindow_nanoseconds></duplicateDetectionHistoryTimeWindow_nanoseconds>
+                <lockDuration_seconds></lockDuration_seconds>
+                <lockDuration_nanoseconds></lockDuration_nanoseconds>
                 <maxDeliveryCount></maxDeliveryCount>
                 <maxMessageSizeInKilobytes></maxMessageSizeInKilobytes>
                 <maxSizeInMegabytes></maxSizeInMegabytes>
@@ -35,29 +43,29 @@
         <faultSequence>
         </faultSequence>
     </resource>
-    <resource methods="GET" uri-template="/updateTopic">
+    <resource methods="PUT" uri-template="/updateTopic">
         <inSequence>
             <asb.Administrator_updateTopic configKey="test_admin">
-    <responseVariable >asb_Administrator_updateTopic_1</responseVariable>
-    <overwriteBody >true</overwriteBody>
-    <topicName >admin_asb_test_topic</topicName>
-    <autoDeleteOnIdle_seconds >1000</autoDeleteOnIdle_seconds>
-    <autoDeleteOnIdle_nanoseconds ></autoDeleteOnIdle_nanoseconds>
-    <defaultMessageTimeToLive_seconds ></defaultMessageTimeToLive_seconds>
-    <defaultMessageTimeToLive_nanoseconds ></defaultMessageTimeToLive_nanoseconds>
-    <duplicateDetectionHistoryTimeWindow_seconds ></duplicateDetectionHistoryTimeWindow_seconds>
-    <duplicateDetectionHistoryTimeWindow_nanoseconds ></duplicateDetectionHistoryTimeWindow_nanoseconds>
-    <maxDeliveryCount ></maxDeliveryCount>
-    <maxMessageSizeInKilobytes ></maxMessageSizeInKilobytes>
-    <maxSizeInMegabytes ></maxSizeInMegabytes>
-    <status >Unknown</status>
-    <userMetadata ></userMetadata>
-    <enableBatchedOperations ></enableBatchedOperations>
-    <deadLetteringOnMessageExpiration ></deadLetteringOnMessageExpiration>
-    <requiresDuplicateDetection ></requiresDuplicateDetection>
-    <enablePartitioning ></enablePartitioning>
-    <requiresSession ></requiresSession>
-    <supportOrdering ></supportOrdering>
+                <responseVariable>asb_Administrator_updateTopic_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>admin_asb_test_topic</topicName>
+                <autoDeleteOnIdle_seconds>1000</autoDeleteOnIdle_seconds>
+                <autoDeleteOnIdle_nanoseconds></autoDeleteOnIdle_nanoseconds>
+                <defaultMessageTimeToLive_seconds></defaultMessageTimeToLive_seconds>
+                <defaultMessageTimeToLive_nanoseconds></defaultMessageTimeToLive_nanoseconds>
+                <duplicateDetectionHistoryTimeWindow_seconds></duplicateDetectionHistoryTimeWindow_seconds>
+                <duplicateDetectionHistoryTimeWindow_nanoseconds></duplicateDetectionHistoryTimeWindow_nanoseconds>
+                <maxDeliveryCount></maxDeliveryCount>
+                <maxMessageSizeInKilobytes></maxMessageSizeInKilobytes>
+                <maxSizeInMegabytes></maxSizeInMegabytes>
+                <status>Unknown</status>
+                <userMetadata></userMetadata>
+                <enableBatchedOperations></enableBatchedOperations>
+                <deadLetteringOnMessageExpiration></deadLetteringOnMessageExpiration>
+                <requiresDuplicateDetection></requiresDuplicateDetection>
+                <enablePartitioning></enablePartitioning>
+                <requiresSession></requiresSession>
+                <supportOrdering></supportOrdering>
             </asb.Administrator_updateTopic>
             <respond/>
         </inSequence>
