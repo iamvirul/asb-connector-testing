@@ -58,8 +58,18 @@
     <enablePartitioning ></enablePartitioning>
     <requiresSession ></requiresSession>
     <supportOrdering ></supportOrdering>
-</asb.Administrator_updateTopic>
-
+            </asb.Administrator_updateTopic>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+    <resource methods="GET" uri-template="/listTopics">
+        <inSequence>
+            <asb.Administrator_listTopics configKey="test_admin">
+                <responseVariable>asb_Administrator_listTopics_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+            </asb.Administrator_listTopics>
             <respond/>
         </inSequence>
         <faultSequence>

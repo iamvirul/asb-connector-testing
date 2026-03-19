@@ -22,3 +22,8 @@ paths:
       responses:
         default:
           description: Default response
+  /listTopics:
+    get:
+      responses:
+        default:
+          description: Default response
