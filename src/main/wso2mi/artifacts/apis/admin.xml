@@ -75,4 +75,16 @@
         <faultSequence>
         </faultSequence>
     </resource>
+    <resource methods="DELETE" uri-template="/deleteTopic">
+        <inSequence>
+            <asb.Administrator_deleteTopic configKey="test_admin">
+                <responseVariable>asb_Administrator_deleteTopic_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>mi-test-2-final</topicName>
+            </asb.Administrator_deleteTopic>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
 </api>

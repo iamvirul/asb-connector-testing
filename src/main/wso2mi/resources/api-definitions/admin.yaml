@@ -27,3 +27,8 @@ paths:
       responses:
         default:
           description: Default response
+  /deleteTopic:
+    delete:
+      responses:
+        default:
+          description: Default response
