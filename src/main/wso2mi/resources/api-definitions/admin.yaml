@@ -17,3 +17,8 @@ paths:
       responses:
         default:
           description: Default response
+  /updateTopic:
+    get:
+      responses:
+        default:
+          description: Default response
