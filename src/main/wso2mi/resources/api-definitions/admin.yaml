@@ -90,3 +90,19 @@ paths:
       responses:
         default:
           description: Default response
+  /getSubscription:
+    get:
+      parameters:
+      - name: topicName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: subName
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default response
