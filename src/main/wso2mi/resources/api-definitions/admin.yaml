@@ -57,8 +57,16 @@ paths:
       responses:
         default:
           description: Default response
-  /deleteTopic:
+  /deleteTopic/{topicName}:
     delete:
+      parameters:
+      - name: topicName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
         default:
           description: Default response

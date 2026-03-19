@@ -2,29 +2,29 @@
 <api context="/admin" name="admin" xmlns="http://ws.apache.org/ns/synapse">
     <resource methods="POST" uri-template="/createTopic">
         <inSequence>
-            <asb.Administrator_createTopic configKey="test_admin">
-                <responseVariable>asb_Administrator_createTopic_1</responseVariable>
-                <overwriteBody>true</overwriteBody>
-                <topicName>admin_asb_test_topic</topicName>
-                <autoDeleteOnIdle_seconds></autoDeleteOnIdle_seconds>
-                <autoDeleteOnIdle_nanoseconds></autoDeleteOnIdle_nanoseconds>
-                <defaultMessageTimeToLive_seconds></defaultMessageTimeToLive_seconds>
-                <defaultMessageTimeToLive_nanoseconds></defaultMessageTimeToLive_nanoseconds>
-                <duplicateDetectionHistoryTimeWindow_seconds></duplicateDetectionHistoryTimeWindow_seconds>
-                <duplicateDetectionHistoryTimeWindow_nanoseconds></duplicateDetectionHistoryTimeWindow_nanoseconds>
-                <lockDuration_seconds></lockDuration_seconds>
-                <lockDuration_nanoseconds></lockDuration_nanoseconds>
-                <maxDeliveryCount></maxDeliveryCount>
-                <maxMessageSizeInKilobytes></maxMessageSizeInKilobytes>
-                <maxSizeInMegabytes></maxSizeInMegabytes>
-                <status>Unknown</status>
-                <userMetadata></userMetadata>
-                <enableBatchedOperations></enableBatchedOperations>
-                <deadLetteringOnMessageExpiration></deadLetteringOnMessageExpiration>
-                <requiresDuplicateDetection></requiresDuplicateDetection>
-                <enablePartitioning></enablePartitioning>
-                <requiresSession></requiresSession>
-                <supportOrdering></supportOrdering>
+            <asb.Administrator_createTopic configKey="asb_admin_connection">
+    <responseVariable >asb_Administrator_createTopic_1</responseVariable>
+    <overwriteBody >true</overwriteBody>
+    <topicName >{${payload.topicName}}</topicName>
+    <autoDeleteOnIdle_seconds ></autoDeleteOnIdle_seconds>
+    <autoDeleteOnIdle_nanoseconds ></autoDeleteOnIdle_nanoseconds>
+    <defaultMessageTimeToLive_seconds ></defaultMessageTimeToLive_seconds>
+    <defaultMessageTimeToLive_nanoseconds ></defaultMessageTimeToLive_nanoseconds>
+    <duplicateDetectionHistoryTimeWindow_seconds ></duplicateDetectionHistoryTimeWindow_seconds>
+    <duplicateDetectionHistoryTimeWindow_nanoseconds ></duplicateDetectionHistoryTimeWindow_nanoseconds>
+    <lockDuration_seconds ></lockDuration_seconds>
+    <lockDuration_nanoseconds ></lockDuration_nanoseconds>
+    <maxDeliveryCount ></maxDeliveryCount>
+    <maxMessageSizeInKilobytes ></maxMessageSizeInKilobytes>
+    <maxSizeInMegabytes ></maxSizeInMegabytes>
+    <status >Unknown</status>
+    <userMetadata ></userMetadata>
+    <enableBatchedOperations ></enableBatchedOperations>
+    <deadLetteringOnMessageExpiration ></deadLetteringOnMessageExpiration>
+    <requiresDuplicateDetection ></requiresDuplicateDetection>
+    <enablePartitioning ></enablePartitioning>
+    <requiresSession ></requiresSession>
+    <supportOrdering ></supportOrdering>
             </asb.Administrator_createTopic>
             <respond/>
         </inSequence>
@@ -33,7 +33,7 @@
     </resource>
     <resource methods="GET" uri-template="/getTopic">
         <inSequence>
-            <asb.Administrator_getTopic configKey="test_admin">
+            <asb.Administrator_getTopic configKey="asb_admin_connection">
                 <responseVariable>asb_Administrator_getTopic_1</responseVariable>
                 <overwriteBody>true</overwriteBody>
                 <topicName>admin_asb_test_topic</topicName>
@@ -45,27 +45,27 @@
     </resource>
     <resource methods="PUT" uri-template="/updateTopic">
         <inSequence>
-            <asb.Administrator_updateTopic configKey="test_admin">
-                <responseVariable>asb_Administrator_updateTopic_1</responseVariable>
-                <overwriteBody>true</overwriteBody>
-                <topicName>admin_asb_test_topic</topicName>
-                <autoDeleteOnIdle_seconds>1000</autoDeleteOnIdle_seconds>
-                <autoDeleteOnIdle_nanoseconds></autoDeleteOnIdle_nanoseconds>
-                <defaultMessageTimeToLive_seconds></defaultMessageTimeToLive_seconds>
-                <defaultMessageTimeToLive_nanoseconds></defaultMessageTimeToLive_nanoseconds>
-                <duplicateDetectionHistoryTimeWindow_seconds></duplicateDetectionHistoryTimeWindow_seconds>
-                <duplicateDetectionHistoryTimeWindow_nanoseconds></duplicateDetectionHistoryTimeWindow_nanoseconds>
-                <maxDeliveryCount></maxDeliveryCount>
-                <maxMessageSizeInKilobytes></maxMessageSizeInKilobytes>
-                <maxSizeInMegabytes></maxSizeInMegabytes>
-                <status>Unknown</status>
-                <userMetadata></userMetadata>
-                <enableBatchedOperations></enableBatchedOperations>
-                <deadLetteringOnMessageExpiration></deadLetteringOnMessageExpiration>
-                <requiresDuplicateDetection></requiresDuplicateDetection>
-                <enablePartitioning></enablePartitioning>
-                <requiresSession></requiresSession>
-                <supportOrdering></supportOrdering>
+            <asb.Administrator_updateTopic configKey="asb_admin_connection">
+    <responseVariable >asb_Administrator_updateTopic_1</responseVariable>
+    <overwriteBody >true</overwriteBody>
+    <topicName >{${payload.topicName}}</topicName>
+    <autoDeleteOnIdle_seconds >1000</autoDeleteOnIdle_seconds>
+    <autoDeleteOnIdle_nanoseconds ></autoDeleteOnIdle_nanoseconds>
+    <defaultMessageTimeToLive_seconds ></defaultMessageTimeToLive_seconds>
+    <defaultMessageTimeToLive_nanoseconds ></defaultMessageTimeToLive_nanoseconds>
+    <duplicateDetectionHistoryTimeWindow_seconds ></duplicateDetectionHistoryTimeWindow_seconds>
+    <duplicateDetectionHistoryTimeWindow_nanoseconds ></duplicateDetectionHistoryTimeWindow_nanoseconds>
+    <maxDeliveryCount ></maxDeliveryCount>
+    <maxMessageSizeInKilobytes ></maxMessageSizeInKilobytes>
+    <maxSizeInMegabytes ></maxSizeInMegabytes>
+    <status >Unknown</status>
+    <userMetadata ></userMetadata>
+    <enableBatchedOperations ></enableBatchedOperations>
+    <deadLetteringOnMessageExpiration ></deadLetteringOnMessageExpiration>
+    <requiresDuplicateDetection ></requiresDuplicateDetection>
+    <enablePartitioning ></enablePartitioning>
+    <requiresSession ></requiresSession>
+    <supportOrdering ></supportOrdering>
             </asb.Administrator_updateTopic>
             <respond/>
         </inSequence>
@@ -74,7 +74,7 @@
     </resource>
     <resource methods="GET" uri-template="/listTopics">
         <inSequence>
-            <asb.Administrator_listTopics configKey="test_admin">
+            <asb.Administrator_listTopics configKey="asb_admin_connection">
                 <responseVariable>asb_Administrator_listTopics_1</responseVariable>
                 <overwriteBody>true</overwriteBody>
             </asb.Administrator_listTopics>
@@ -83,13 +83,14 @@
         <faultSequence>
         </faultSequence>
     </resource>
-    <resource methods="DELETE" uri-template="/deleteTopic">
+    <resource methods="DELETE" uri-template="/deleteTopic/{topicName}">
         <inSequence>
-            <asb.Administrator_deleteTopic configKey="test_admin">
+            <asb.Administrator_deleteTopic configKey="asb_admin_connection">
                 <responseVariable>asb_Administrator_deleteTopic_1</responseVariable>
                 <overwriteBody>true</overwriteBody>
-                <topicName>mi-test-2-final</topicName>
+                <topicName>{${params.pathParams.topicName}}</topicName>
             </asb.Administrator_deleteTopic>
+
             <respond/>
         </inSequence>
         <faultSequence>
