@@ -136,9 +136,35 @@
     <overwriteBody >true</overwriteBody>
     <topicName >{${params.queryParams.topicName}}</topicName>
     <subscriptionName >{${params.queryParams.subName}}</subscriptionName>
-</asb.Administrator_getSubscription>
-
-
+            </asb.Administrator_getSubscription>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
+    <resource methods="PUT" uri-template="/updateSubscription">
+        <inSequence>
+        <asb.Administrator_updateSubscription configKey="asb_admin_connection">
+    <responseVariable >asb_Administrator_updateSubscription_1</responseVariable>
+    <overwriteBody >true</overwriteBody>
+    <topicName >{${payload.topicName}}</topicName>
+    <subscriptionName >{${payload.subscriptionName}}</subscriptionName>
+    <autoDeleteOnIdle_seconds >{${payload.idleSecond}}</autoDeleteOnIdle_seconds>
+    <autoDeleteOnIdle_nanoseconds >{${payload.idleNanoSecond}}</autoDeleteOnIdle_nanoseconds>
+    <defaultMessageTimeToLive_seconds ></defaultMessageTimeToLive_seconds>
+    <defaultMessageTimeToLive_nanoseconds ></defaultMessageTimeToLive_nanoseconds>
+    <deadLetteringOnMessageExpiration ></deadLetteringOnMessageExpiration>
+    <deadLetteringOnFilterEvaluationExceptions ></deadLetteringOnFilterEvaluationExceptions>
+    <enableBatchedOperations ></enableBatchedOperations>
+    <forwardDeadLetteredMessagesTo ></forwardDeadLetteredMessagesTo>
+    <forwardTo ></forwardTo>
+    <lockDuration_seconds ></lockDuration_seconds>
+    <lockDuration_nanoseconds ></lockDuration_nanoseconds>
+    <maxDeliveryCount ></maxDeliveryCount>
+    <status >Active</status>
+    <userMetadata ></userMetadata>
+            </asb.Administrator_updateSubscription>
             <respond/>
         </inSequence>
         <faultSequence>

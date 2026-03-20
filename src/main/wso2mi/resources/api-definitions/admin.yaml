@@ -96,13 +96,37 @@ paths:
       - name: topicName
         in: query
         required: true
+        style: form
+        explode: true
         schema:
           type: string
       - name: subName
         in: query
         required: true
+        style: form
+        explode: true
         schema:
           type: string
+      responses:
+        default:
+          description: Default response
+  /updateSubscription:
+    put:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+          application/xml:
+            schema:
+              type: object
+              xml:
+                name: payload
+        required: false
       responses:
         default:
           description: Default response
