@@ -163,3 +163,16 @@ paths:
       responses:
         default:
           description: Default response
+  /topicExists/{topicName}:
+    get:
+      parameters:
+      - name: topicName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default response

@@ -198,4 +198,17 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="GET" uri-template="/topicExists/{topicName}">
+        <inSequence>
+            <asb.Administrator_topicExists configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_topicExists_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>{${params.pathParams.topicName}}</topicName>
+            </asb.Administrator_topicExists>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
