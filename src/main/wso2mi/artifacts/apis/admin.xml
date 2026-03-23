@@ -171,4 +171,18 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="GET" uri-template="/listSubscriptions/{topicName}">
+        <inSequence>
+            <asb.Administrator_listSubscriptions configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_listSubscriptions_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>{${params.pathParams.topicName}}</topicName>
+            </asb.Administrator_listSubscriptions>
+
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
