@@ -274,4 +274,18 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="GET" uri-template="/listRules?topicName={topicName}&amp;subName={subName}">
+        <inSequence>
+            <asb.Administrator_listRules configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_listRules_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>{${params.queryParams.topicName}}</topicName>
+                <subscriptionName>{${params.queryParams.subName}}</subscriptionName>
+            </asb.Administrator_listRules>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
