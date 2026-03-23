@@ -236,7 +236,21 @@
                 <rule_filter>{${payload.filter}}</rule_filter>
                 <rule_action>{${payload.action}}</rule_action>
             </asb.Administrator_createRule>
-
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
+    <resource methods="GET" uri-template="/getRule?topicName={topicName}&amp;subName={subName}&amp;ruleName={ruleName}">
+        <inSequence>
+            <asb.Administrator_getRule configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_getRule_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>{${params.queryParams.topicName}}</topicName>
+                <subscriptionName>{${params.queryParams.subName}}</subscriptionName>
+                <ruleName>{${params.queryParams.ruleName}}</ruleName>
+            </asb.Administrator_getRule>
             <respond/>
         </inSequence>
         <faultSequence>
