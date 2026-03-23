@@ -178,7 +178,20 @@
                 <overwriteBody>true</overwriteBody>
                 <topicName>{${params.pathParams.topicName}}</topicName>
             </asb.Administrator_listSubscriptions>
-
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
+    <resource methods="DELETE" uri-template="/deleteSubscription?topicName={topicName}&amp;subName={subName}">
+        <inSequence>
+            <asb.Administrator_deleteSubscription configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_deleteSubscription_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>{${params.queryParams.topicName}}</topicName>
+                <subscriptionName>{${params.queryParams.subName}}</subscriptionName>
+            </asb.Administrator_deleteSubscription>
             <respond/>
         </inSequence>
         <faultSequence>

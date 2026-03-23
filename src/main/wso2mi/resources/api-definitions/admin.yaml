@@ -143,3 +143,23 @@ paths:
       responses:
         default:
           description: Default response
+  /deleteSubscription:
+    delete:
+      parameters:
+      - name: topicName
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: subName
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default response
