@@ -257,4 +257,21 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="PUT" uri-template="/updateRule">
+        <inSequence>
+            <asb.Administrator_updateRule configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_updateRule_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <topicName>{${payload.topicName}}</topicName>
+                <subscriptionName>{${payload.subName}}</subscriptionName>
+                <ruleName>{${payload.ruleName}}</ruleName>
+                <rule_filter>{${payload.filter}}</rule_filter>
+                <rule_action>{${payload.action}}</rule_action>
+            </asb.Administrator_updateRule>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
