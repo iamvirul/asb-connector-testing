@@ -394,7 +394,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.scm.id>integration-project</project.scm.id>
-        <project.runtime.version>4.5.0</project.runtime.version>
+        <project.runtime.version>4.4.0</project.runtime.version>
         <dockerfile.base.image>wso2/wso2mi:${project.runtime.version}</dockerfile.base.image>
         <dockerfile.name>asb-connector-testing:1.0.0</dockerfile.name>
         <car.plugin.version>5.4.13</car.plugin.version>
