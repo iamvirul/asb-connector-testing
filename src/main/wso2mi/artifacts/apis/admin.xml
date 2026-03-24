@@ -394,4 +394,17 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="DELETE" uri-template="/deleteQueue?queueName={queueName}">
+        <inSequence>
+        <asb.Administrator_deleteQueue configKey="asb_admin_connection">
+    <responseVariable >asb_Administrator_deleteQueue_1</responseVariable>
+    <overwriteBody >true</overwriteBody>
+    <queueName >{${params.queryParams.queueName}}</queueName>
+            </asb.Administrator_deleteQueue>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>

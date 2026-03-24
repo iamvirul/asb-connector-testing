@@ -368,3 +368,16 @@ paths:
       responses:
         default:
           description: Default response
+  /deleteQueue:
+    delete:
+      parameters:
+      - name: queueName
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default response
