@@ -407,4 +407,17 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="GET" uri-template="/queueExists/{queueName}">
+        <inSequence>
+            <asb.Administrator_queueExists configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_queueExists_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <queueName>{${params.pathParams.queueName}}</queueName>
+            </asb.Administrator_queueExists>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
