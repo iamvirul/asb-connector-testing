@@ -288,4 +288,19 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="DELETE" uri-template="/deleteRule?topicName={topicName}&amp;subName={subName}&amp;ruleName={ruleName}">
+        <inSequence>
+        <asb.Administrator_deleteRule configKey="asb_admin_connection">
+    <responseVariable >asb_Administrator_deleteRule_1</responseVariable>
+    <overwriteBody >true</overwriteBody>
+    <topicName >{${params.queryParams.topicName}}</topicName>
+    <subscriptionName >{${params.queryParams.subName}}</subscriptionName>
+    <ruleName >{${params.queryParams.ruleName}}</ruleName>
+            </asb.Administrator_deleteRule>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
