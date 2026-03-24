@@ -382,4 +382,16 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="GET" uri-template="/listQueues">
+        <inSequence>
+            <asb.Administrator_listQueues configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_listQueues_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+            </asb.Administrator_listQueues>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>

@@ -363,3 +363,8 @@ paths:
       responses:
         default:
           description: Default response
+  /listQueues:
+    get:
+      responses:
+        default:
+          description: Default response
