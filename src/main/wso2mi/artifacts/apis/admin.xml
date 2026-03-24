@@ -349,4 +349,37 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="PUT" uri-template="/updateQueue">
+        <inSequence>
+            <asb.Administrator_updateQueue configKey="asb_admin_connection">
+                <responseVariable>asb_Administrator_updateQueue_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <queueName>{${payload.queueName}}</queueName>
+                <autoDeleteOnIdle_seconds>{${payload.doiSeconds}}</autoDeleteOnIdle_seconds>
+                <autoDeleteOnIdle_nanoseconds></autoDeleteOnIdle_nanoseconds>
+                <defaultMessageTimeToLive_seconds></defaultMessageTimeToLive_seconds>
+                <defaultMessageTimeToLive_nanoseconds></defaultMessageTimeToLive_nanoseconds>
+                <duplicateDetectionHistoryTimeWindow_seconds></duplicateDetectionHistoryTimeWindow_seconds>
+                <duplicateDetectionHistoryTimeWindow_nanoseconds></duplicateDetectionHistoryTimeWindow_nanoseconds>
+                <forwardDeadLetteredMessagesTo></forwardDeadLetteredMessagesTo>
+                <forwardTo></forwardTo>
+                <lockDuration_seconds></lockDuration_seconds>
+                <lockDuration_nanoseconds></lockDuration_nanoseconds>
+                <maxDeliveryCount></maxDeliveryCount>
+                <maxMessageSizeInKilobytes></maxMessageSizeInKilobytes>
+                <maxSizeInMegabytes></maxSizeInMegabytes>
+                <status>Unknown</status>
+                <userMetadata></userMetadata>
+                <enableBatchedOperations></enableBatchedOperations>
+                <deadLetteringOnMessageExpiration></deadLetteringOnMessageExpiration>
+                <requiresDuplicateDetection></requiresDuplicateDetection>
+                <enablePartitioning></enablePartitioning>
+                <requiresSession></requiresSession>
+            </asb.Administrator_updateQueue>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
