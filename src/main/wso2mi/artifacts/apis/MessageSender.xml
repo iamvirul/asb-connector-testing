@@ -33,4 +33,17 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="POST" uri-template="/sendPayload">
+        <inSequence>
+            <asb.MessageSender_sendPayload configKey="messageSender_connection">
+                <responseVariable>asb_MessageSender_sendPayload_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <messagePayload>{${payload.messagePayload}}</messagePayload>
+            </asb.MessageSender_sendPayload>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
