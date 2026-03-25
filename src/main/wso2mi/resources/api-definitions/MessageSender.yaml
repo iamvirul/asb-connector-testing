@@ -67,3 +67,16 @@ paths:
       responses:
         default:
           description: Default response
+  /cancel/{sequenceNumber}:
+    get:
+      parameters:
+      - name: sequenceNumber
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default response

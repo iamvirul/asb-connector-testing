@@ -82,9 +82,20 @@
                 <minute>{${payload.minute}}</minute>
                 <second>{${payload.second}}</second>
             </asb.MessageSender_schedule>
-
-
-<respond/>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
+    <resource methods="GET" uri-template="/cancel/{sequenceNumber}">
+        <inSequence>
+        <asb.MessageSender_cancel configKey="messageSender_connection">
+    <responseVariable >asb_MessageSender_cancel_1</responseVariable>
+    <overwriteBody >true</overwriteBody>
+    <sequenceNumber >{${params.pathParams.sequenceNumber}}</sequenceNumber>
+            </asb.MessageSender_cancel>
+            <respond/>
         </inSequence>
         <faultSequence>
             <sequence key="CommonFaultSequence"/>
