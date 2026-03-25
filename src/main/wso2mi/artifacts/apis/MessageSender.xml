@@ -46,4 +46,48 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="POST" uri-template="/schedule">
+        <inSequence>
+            <asb.MessageSender_schedule configKey="messageSender_connection">
+                <responseVariable>asb_MessageSender_schedule_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <body>{${payload.body}}</body>
+                <contentType></contentType>
+                <messageId></messageId>
+                <to></to>
+                <replyTo></replyTo>
+                <replyToSessionId></replyToSessionId>
+                <label></label>
+                <sessionId></sessionId>
+                <correlationId></correlationId>
+                <partitionKey></partitionKey>
+                <timeToLive></timeToLive>
+                <sequenceNumber></sequenceNumber>
+                <lockToken></lockToken>
+                <applicationProperties_properties></applicationProperties_properties>
+                <deliveryCount></deliveryCount>
+                <enqueuedTime></enqueuedTime>
+                <enqueuedSequenceNumber></enqueuedSequenceNumber>
+                <deadLetterErrorDescription></deadLetterErrorDescription>
+                <deadLetterReason></deadLetterReason>
+                <deadLetterSource></deadLetterSource>
+                <state></state>
+                <timeAbbrev></timeAbbrev>
+                <which>0</which>
+                <dayOfWeek>0</dayOfWeek>
+                <year>{${payload.year}}</year>
+                <month>{${payload.month}}</month>
+                <day>{${payload.day}}</day>
+                <hour>{${payload.hour}}</hour>
+                <minute>{${payload.minute}}</minute>
+                <second>{${payload.second}}</second>
+            </asb.MessageSender_schedule>
+
+
+<respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
