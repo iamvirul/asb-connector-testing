@@ -1,0 +1,14 @@
+openapi: 3.0.1
+info:
+  title: MessageReceiver
+  description: API Definition of MessageReceiver
+  version: 1.0.0
+servers:
+- url: http://localhost:8290/messagereceiver
+- url: https://localhost:8253/messagereceiver
+paths:
+  /receive:
+    get:
+      responses:
+        default:
+          description: Default response

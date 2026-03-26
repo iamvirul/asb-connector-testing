@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/messagereceiver" name="MessageReceiver" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/receive">
+        <inSequence>
+            <asb.MessageReceiver_receive configKey="asb_messagereceiver_connection">
+                <responseVariable>asb_MessageReceiver_receive_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <serverWaitTime>60</serverWaitTime>
+                <deadLettered>false</deadLettered>
+            </asb.MessageReceiver_receive>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
+</api>
