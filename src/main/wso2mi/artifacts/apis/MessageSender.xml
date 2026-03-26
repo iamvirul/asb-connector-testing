@@ -101,4 +101,20 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="POST" uri-template="/sendBatch">
+        <inSequence>
+            <asb.MessageSender_sendBatch configKey="messageSender_connection">
+                <responseVariable>asb_MessageSender_sendBatch_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <messageCount>{${payload.count}}</messageCount>
+                <messagesInputMode>JSON</messagesInputMode>
+                <messagesJson>{${payload.batch}}</messagesJson>
+            </asb.MessageSender_sendBatch>
+
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
