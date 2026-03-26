@@ -14,4 +14,18 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="GET" uri-template="/receivePayload">
+        <inSequence>
+            <asb.MessageReceiver_receivePayload configKey="asb_messagereceiver_connection">
+                <responseVariable>asb_MessageReceiver_receivePayload_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <serverWaitTime>60</serverWaitTime>
+                <deadLettered>false</deadLettered>
+            </asb.MessageReceiver_receivePayload>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
