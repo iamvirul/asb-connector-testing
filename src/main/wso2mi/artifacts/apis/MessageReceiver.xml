@@ -28,4 +28,19 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="GET" uri-template="/receiveBatch/{count}">
+        <inSequence>
+            <asb.MessageReceiver_receiveBatch configKey="asb_messagereceiver_connection">
+                <responseVariable>asb_MessageReceiver_receiveBatch_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+                <maxMessageCount>{${params.pathParams.count}}</maxMessageCount>
+                <serverWaitTime></serverWaitTime>
+                <deadLettered>false</deadLettered>
+            </asb.MessageReceiver_receiveBatch>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
