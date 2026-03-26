@@ -110,11 +110,21 @@
                 <messagesInputMode>JSON</messagesInputMode>
                 <messagesJson>{${payload.batch}}</messagesJson>
             </asb.MessageSender_sendBatch>
-
             <respond/>
         </inSequence>
         <faultSequence>
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
+    </resource>
+    <resource methods="GET" uri-template="/close">
+        <inSequence>
+            <asb.MessageSender_close configKey="messageSender_connection">
+                <responseVariable>asb_MessageSender_close_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+            </asb.MessageSender_close>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+        <sequence key="CommonFaultSequence" /></faultSequence>
     </resource>
 </api>

@@ -100,3 +100,8 @@ paths:
       responses:
         default:
           description: Default response
+  /close:
+    get:
+      responses:
+        default:
+          description: Default response
