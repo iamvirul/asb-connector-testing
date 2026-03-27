@@ -10,63 +10,78 @@ paths:
   /send:
     post:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - body
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                body:
+                  type: string
+                  example: Hello from ASB
       responses:
         default:
           description: Default response
   /sendPayload:
     post:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - messagePayload
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                messagePayload:
+                  type: string
+                  example: Hello payload
       responses:
         default:
           description: Default response
   /schedule:
     post:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - body
+                - year
+                - month
+                - day
+                - hour
+                - minute
+                - second
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                body:
+                  type: string
+                  example: sample test body
+                year:
+                  type: string
+                  example: "2026"
+                month:
+                  type: string
+                  example: "04"
+                day:
+                  type: string
+                  example: "26"
+                hour:
+                  type: string
+                  example: "10"
+                minute:
+                  type: string
+                  example: "30"
+                second:
+                  type: string
+                  example: "00"
       responses:
         default:
-          description: Default response
+          description: 'Returns {"sequenceNumber": <long>}'
   /cancel/{sequenceNumber}:
     get:
       parameters:
@@ -83,20 +98,28 @@ paths:
   /sendBatch:
     post:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - count
+                - batch
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                count:
+                  type: integer
+                  example: 2
+                batch:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      body:
+                        type: string
+                  example:
+                    - body: Batch msg 1
+                    - body: Batch msg 2
       responses:
         default:
           description: Default response
@@ -104,4 +127,4 @@ paths:
     get:
       responses:
         default:
-          description: Default response
+          description: Closes the sender connection (requires server restart to reconnect)

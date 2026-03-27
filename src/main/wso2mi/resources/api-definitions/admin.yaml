@@ -10,45 +10,42 @@ paths:
   /createTopic:
     post:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required: [topicName]
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                topicName:
+                  type: string
+                  example: my-topic
       responses:
         default:
           description: Default response
   /getTopic:
     get:
+      parameters:
+      - name: topicName
+        in: query
+        required: true
+        schema:
+          type: string
       responses:
         default:
           description: Default response
   /updateTopic:
     put:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required: [topicName]
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                topicName:
+                  type: string
       responses:
         default:
           description: Default response
@@ -73,20 +70,17 @@ paths:
   /createSubscription:
     post:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required: [topicName, subsName]
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                topicName:
+                  type: string
+                subsName:
+                  type: string
       responses:
         default:
           description: Default response
@@ -96,15 +90,11 @@ paths:
       - name: topicName
         in: query
         required: true
-        style: form
-        explode: true
         schema:
           type: string
       - name: subName
         in: query
         required: true
-        style: form
-        explode: true
         schema:
           type: string
       responses:
@@ -113,20 +103,23 @@ paths:
   /updateSubscription:
     put:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required: [topicName, subscriptionName]
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                topicName:
+                  type: string
+                subscriptionName:
+                  type: string
+                idleSecond:
+                  type: integer
+                  example: 3600
+                idleNanoSecond:
+                  type: integer
+                  example: 0
       responses:
         default:
           description: Default response
@@ -148,16 +141,12 @@ paths:
       parameters:
       - name: topicName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       - name: subName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       responses:
@@ -181,16 +170,12 @@ paths:
       parameters:
       - name: topicName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       - name: subName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       responses:
@@ -199,20 +184,25 @@ paths:
   /createRule:
     post:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required: [topicName, subName, ruleName, filter, action]
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                topicName:
+                  type: string
+                subName:
+                  type: string
+                ruleName:
+                  type: string
+                filter:
+                  type: string
+                  example: "Region = 'Europe'"
+                action:
+                  type: string
+                  example: "SET Priority = 'High'"
       responses:
         default:
           description: Default response
@@ -221,23 +211,17 @@ paths:
       parameters:
       - name: topicName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       - name: subName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       - name: ruleName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       responses:
@@ -246,20 +230,25 @@ paths:
   /updateRule:
     put:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required: [topicName, subName, ruleName, filter, action]
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                topicName:
+                  type: string
+                subName:
+                  type: string
+                ruleName:
+                  type: string
+                filter:
+                  type: string
+                  example: "Region = 'EMEA'"
+                action:
+                  type: string
+                  example: "SET Priority = 'Urgent'"
       responses:
         default:
           description: Default response
@@ -268,16 +257,12 @@ paths:
       parameters:
       - name: topicName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       - name: subName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       responses:
@@ -288,23 +273,17 @@ paths:
       parameters:
       - name: topicName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       - name: subName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       - name: ruleName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       responses:
@@ -313,20 +292,16 @@ paths:
   /createQueue:
     post:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - queueName
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                queueName:
+                  type: string
       responses:
         default:
           description: Default response
@@ -346,20 +321,19 @@ paths:
   /updateQueue:
     put:
       requestBody:
-        description: Sample Payload
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - queueName
               properties:
-                payload:
-                  type: object
-          application/xml:
-            schema:
-              type: object
-              xml:
-                name: payload
-        required: false
+                queueName:
+                  type: string
+                doiSeconds:
+                  type: integer
+                  example: 3600
       responses:
         default:
           description: Default response
@@ -373,9 +347,7 @@ paths:
       parameters:
       - name: queueName
         in: query
-        required: false
-        style: form
-        explode: true
+        required: true
         schema:
           type: string
       responses:
