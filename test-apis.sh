@@ -347,8 +347,7 @@ fi
 
 GROUP="${1:-all}"
 
-# 'close' is intentionally excluded from 'all' and 'message' to prevent
-# disposing the Ballerina sender/receiver client across test runs.
+# Note: 'all' runs all 33 operations including close (requires server restart after).
 case "$GROUP" in
     topic)        wait_for_server; test_topics ;;
     subscription) wait_for_server; test_subscriptions ;;
@@ -357,7 +356,7 @@ case "$GROUP" in
     message)      wait_for_server; test_messages; test_schedule ;;
     admin)        wait_for_server; test_admin_all ;;
     close)        wait_for_server; close_connections ;;
-    all|"")       wait_for_server; test_admin_all; test_messages; test_schedule ;;
+    all|"")       wait_for_server; test_admin_all; test_messages; test_schedule; close_connections ;;
     *)
         echo -e "${RED}Unknown group: $GROUP${NC}"
         echo "Valid groups: topic, subscription, rule, queue, message, admin, close, all"

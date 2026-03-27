@@ -82,6 +82,9 @@
                 <minute>{${payload.minute}}</minute>
                 <second>{${payload.second}}</second>
             </asb.MessageSender_schedule>
+            <payloadFactory media-type="json">
+                <format>{"sequenceNumber": ${payload}}</format>
+            </payloadFactory>
             <respond/>
         </inSequence>
         <faultSequence>
