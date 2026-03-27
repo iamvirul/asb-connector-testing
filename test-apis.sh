@@ -243,8 +243,8 @@ test_schedule() {
         -H "$CONTENT_TYPE" \
         -d '{
             "body": "Scheduled message from test-apis.sh",
-            "year": 2099, "month": 1, "day": 1,
-            "hour": 0, "minute": 0, "second": 0
+            "year": "2099", "month": "01", "day": "26",
+            "hour": "10", "minute": "30", "second": "00"
         }')
     SCHED_RESP=$(cat "$SCHED_FILE")
     rm -f "$SCHED_FILE"
