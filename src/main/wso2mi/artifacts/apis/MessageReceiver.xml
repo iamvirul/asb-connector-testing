@@ -43,4 +43,16 @@
             <sequence key="CommonFaultSequence"/>
         </faultSequence>
     </resource>
+    <resource methods="GET" uri-template="/close">
+        <inSequence>
+            <asb.MessageReceiver_close configKey="asb_messagereceiver_connection">
+                <responseVariable>asb_MessageReceiver_close_1</responseVariable>
+                <overwriteBody>true</overwriteBody>
+            </asb.MessageReceiver_close>
+            <respond/>
+        </inSequence>
+        <faultSequence>
+            <sequence key="CommonFaultSequence"/>
+        </faultSequence>
+    </resource>
 </api>
