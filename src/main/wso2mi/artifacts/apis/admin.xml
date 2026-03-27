@@ -37,7 +37,7 @@
             <asb.Administrator_getTopic configKey="asb_admin_connection">
                 <responseVariable>asb_Administrator_getTopic_1</responseVariable>
                 <overwriteBody>true</overwriteBody>
-                <topicName>admin_asb_test_topic</topicName>
+                <topicName>{${params.queryParams.topicName}}</topicName>
             </asb.Administrator_getTopic>
             <respond/>
         </inSequence>
