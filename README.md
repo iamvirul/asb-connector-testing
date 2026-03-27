@@ -42,7 +42,7 @@ src/main/wso2mi/
 
 ## Configuration
 
-Edit `src/main/wso2mi/resources/conf/config.properties` and set your actual values:
+Add below properties to .env and set your actual values:
 
 ```properties
 connection_string=Endpoint=sb://<namespace>.servicebus.windows.net/;SharedAccessKeyName=<policy>;SharedAccessKey=<key>
