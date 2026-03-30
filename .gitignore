@@ -45,4 +45,10 @@ mvnw.cmd
 ## Miscellaneous
 ##############################
 *.log
+
+##############################
+## JMeter Load Tests
+##############################
+load-tests/results/
+*.jtl
 		

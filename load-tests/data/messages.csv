@@ -1,0 +1,11 @@
+message_body,message_payload
+"Load test message - Order created","{"\"event\"": "\"order.created\"", "\"orderId\"": "\"ORD-001\"", "\"amount\"": 150.00}"
+"Load test message - Payment processed","{"\"event\"": "\"payment.processed\"", "\"paymentId\"": "\"PAY-001\"", "\"status\"": "\"success\""}"
+"Load test message - Inventory updated","{"\"event\"": "\"inventory.updated\"", "\"sku\"": "\"SKU-12345\"", "\"quantity\"": 100}"
+"Load test message - User registered","{"\"event\"": "\"user.registered\"", "\"userId\"": "\"USR-001\"", "\"email\"": "\"test@example.com\""}"
+"Load test message - Notification sent","{"\"event\"": "\"notification.sent\"", "\"notificationId\"": "\"NOT-001\"", "\"channel\"": "\"email\""}"
+"Load test message - Shipment dispatched","{"\"event\"": "\"shipment.dispatched\"", "\"shipmentId\"": "\"SHP-001\"", "\"carrier\"": "\"DHL\""}"
+"Load test message - Refund initiated","{"\"event\"": "\"refund.initiated\"", "\"refundId\"": "\"REF-001\"", "\"reason\"": "\"defective\""}"
+"Load test message - Subscription renewed","{"\"event\"": "\"subscription.renewed\"", "\"subscriptionId\"": "\"SUB-001\"", "\"plan\"": "\"premium\""}"
+"Load test message - Report generated","{"\"event\"": "\"report.generated\"", "\"reportId\"": "\"RPT-001\"", "\"type\"": "\"monthly\""}"
+"Load test message - Alert triggered","{"\"event\"": "\"alert.triggered\"", "\"alertId\"": "\"ALT-001\"", "\"severity\"": "\"high\""}"

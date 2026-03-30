@@ -1,0 +1,28 @@
+# Custom Test Profile - Copy to custom.properties and modify
+# Copy this file: cp custom.properties.example custom.properties
+
+# Server configuration
+host=localhost
+port=8290
+protocol=http
+
+# Thread configuration
+threads=10
+rampup=30
+duration=300
+loops=-1
+
+# Think time between requests (ms)
+thinktime=100
+
+# Thread group specific settings
+batch_threads=5
+receiver_threads=5
+batch_receiver_threads=3
+
+# Batch size for batch operations
+batch_size=5
+
+# Advanced settings (uncomment to use)
+# connect_timeout=5000
+# response_timeout=30000
