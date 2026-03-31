@@ -10,7 +10,8 @@
 #   ./test-apis.sh queue            Queue CRUD operations
 #   ./test-apis.sh subscription     Subscription CRUD operations
 #   ./test-apis.sh rule             Rule operations (create/update known connector bug)
-#   ./test-apis.sh message          Send & receive messages + schedule
+#   ./test-apis.sh message          Send & receive messages + schedule + receiver ops
+#   ./test-apis.sh receiver         MessageReceiver operations (complete/abandon/defer/deadLetter/renewLock)
 #   ./test-apis.sh admin            All admin operations
 #   ./test-apis.sh close            Close sender & receiver (DESTRUCTIVE — requires server restart after)
 #
@@ -101,6 +102,13 @@ skip_test() {
     echo -e "       ${YELLOW}^ $reason${NC}"
     echo ""
     ((skip++))
+}
+
+# receive_msg_seq — Receives one message and echoes its sequenceNumber (or "" on failure).
+receive_msg_seq() {
+    local resp
+    resp=$(curl -s -X GET "$BASE_URL/messagereceiver/receive" -H "$CONTENT_TYPE")
+    echo "$resp" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('sequenceNumber',''))" 2>/dev/null
 }
 
 wait_for_server() {
@@ -277,6 +285,106 @@ test_schedule() {
     fi
 }
 
+# ── MessageReceiver Operations (require PEEK_LOCK mode) ───────────────────────
+#
+# Each sub-test sends a message first so there is something to receive.
+# The /complete, /abandon, /deadLetter, and /renewLock endpoints now perform
+# receive internally — no manual sequenceNumber passing is required.
+# Tests are ordered to avoid lock conflicts:
+#   renewLock   (receive → renew lock)
+#   complete    (receive → complete)
+#   abandon     (receive → abandon; returns message to queue)
+#   deadLetter  (receive → dead-letter; reason/description via query params)
+#   defer → receiveDeferred  (skipped — known connector bugs)
+
+test_receiver_ops() {
+    # ── renewLock ────────────────────────────────────────────────────────────
+    print_header "RECEIVER OPERATIONS — receiveAndRenewLock"
+
+    run_test "Send message (for receiveAndRenewLock)" POST "$BASE_URL/messagesender/send" \
+        '{"body": "test for renewLock"}' 200
+
+    run_test "Receive and Renew Lock" GET "$BASE_URL/messagereceiver/receiveAndRenewLock" \
+        "" 200
+
+    # ── complete ─────────────────────────────────────────────────────────────
+    print_header "RECEIVER OPERATIONS — receiveAndComplete"
+
+    run_test "Send message (for receiveAndComplete)" POST "$BASE_URL/messagesender/send" \
+        '{"body": "test for complete"}' 200
+
+    run_test "Receive and Complete" GET "$BASE_URL/messagereceiver/receiveAndComplete" \
+        "" 200
+
+    # ── abandon ──────────────────────────────────────────────────────────────
+    print_header "RECEIVER OPERATIONS — receiveAndAbandon"
+
+    run_test "Send message (for receiveAndAbandon)" POST "$BASE_URL/messagesender/send" \
+        '{"body": "test for abandon"}' 200
+
+    run_test "Receive and Abandon" GET "$BASE_URL/messagereceiver/receiveAndAbandon" \
+        "" 200
+
+    # ── receiveAndDefer ───────────────────────────────────────────────────────
+    print_header "RECEIVER OPERATIONS — receiveAndDefer"
+
+    run_test "Send message (for receiveAndDefer)" POST "$BASE_URL/messagesender/send" \
+        '{"body": "test for defer"}' 200
+
+    echo -e "  ${CYAN}Receiving and deferring message — capturing sequenceNumber for receiveDeferred...${NC}"
+    DEFER_FILE=$(mktemp)
+    DEFER_HTTP=$(curl -s -o "$DEFER_FILE" -w "%{http_code}" -X GET "$BASE_URL/messagereceiver/receiveAndDefer" -H "$CONTENT_TYPE")
+    DEFER_RESP=$(cat "$DEFER_FILE")
+    rm -f "$DEFER_FILE"
+
+    if [ "$DEFER_HTTP" -ne 200 ]; then
+        echo -e "  ${RED}FAIL${NC} [HTTP $DEFER_HTTP] Receive and Defer"
+        ((fail++))
+        echo ""
+        echo -e "  ${RED}FAIL${NC} Receive Deferred and Complete"
+        echo -e "       ${RED}^ receiveAndDefer failed — no deferred sequenceNumber available${NC}"
+        ((fail++))
+        echo ""
+    else
+        echo -e "  ${GREEN}PASS${NC} [HTTP $DEFER_HTTP] Receive and Defer"
+        ((pass++))
+        echo "$DEFER_RESP" | python3 -m json.tool 2>/dev/null | sed 's/^/    /' || echo "    $DEFER_RESP"
+        echo ""
+
+        DEFERRED_SEQ=$(echo "$DEFER_RESP" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('sequenceNumber',''))" 2>/dev/null)
+        if [ -n "$DEFERRED_SEQ" ]; then
+            run_test "Receive Deferred and Complete (seq=$DEFERRED_SEQ)" POST \
+                "$BASE_URL/messagereceiver/receiveDeferred" \
+                "{\"id\": $DEFERRED_SEQ}" 200
+        else
+            echo -e "  ${RED}FAIL${NC} Receive Deferred and Complete"
+            echo -e "       ${RED}^ could not extract sequenceNumber from defer response: $DEFER_RESP${NC}"
+            ((fail++))
+            echo ""
+        fi
+    fi
+
+    # ── deadLetter ────────────────────────────────────────────────────────────
+    print_header "RECEIVER OPERATIONS — receiveAndDeadLetter"
+
+    run_test "Send message (for receiveAndDeadLetter)" POST "$BASE_URL/messagesender/send" \
+        '{"body": "test for deadLetter"}' 200
+
+    run_test "Receive and Dead Letter" GET "$BASE_URL/messagereceiver/receiveAndDeadLetter" \
+        "" 200
+
+    # ── receiveBatchAndSettle ─────────────────────────────────────────────────
+    print_header "RECEIVER OPERATIONS — receiveBatchAndSettle"
+
+    run_test "Send message 1 (for receiveBatchAndSettle)" POST "$BASE_URL/messagesender/send" \
+        '{"body": "batch settle msg 1"}' 200
+    run_test "Send message 2 (for receiveBatchAndSettle)" POST "$BASE_URL/messagesender/send" \
+        '{"body": "batch settle msg 2"}' 200
+
+    run_test "Receive Batch and Settle" GET "$BASE_URL/messagereceiver/receiveBatchAndSettle" \
+        "" 200
+}
+
 close_connections() {
     print_header "CLOSE CONNECTIONS"
     echo -e "  ${YELLOW}WARNING: Closing connections is DESTRUCTIVE.${NC}"
@@ -347,19 +455,20 @@ fi
 
 GROUP="${1:-all}"
 
-# Note: 'all' runs all 33 operations including close (requires server restart after).
+# Note: 'all' runs all operations including close (requires server restart after).
 case "$GROUP" in
     topic)        wait_for_server; test_topics ;;
     subscription) wait_for_server; test_subscriptions ;;
     rule)         wait_for_server; test_rules ;;
     queue)        wait_for_server; test_queues ;;
-    message)      wait_for_server; test_messages; test_schedule ;;
+    message)      wait_for_server; test_messages; test_schedule; test_receiver_ops ;;
+    receiver)     wait_for_server; test_receiver_ops ;;
     admin)        wait_for_server; test_admin_all ;;
     close)        wait_for_server; close_connections ;;
-    all|"")       wait_for_server; test_admin_all; test_messages; test_schedule; close_connections ;;
+    all|"")       wait_for_server; test_admin_all; test_messages; test_schedule; test_receiver_ops; close_connections ;;
     *)
         echo -e "${RED}Unknown group: $GROUP${NC}"
-        echo "Valid groups: topic, subscription, rule, queue, message, admin, close, all"
+        echo "Valid groups: topic, subscription, rule, queue, message, receiver, admin, close, all"
         exit 1
         ;;
 esac
