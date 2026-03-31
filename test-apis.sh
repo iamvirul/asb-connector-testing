@@ -465,7 +465,7 @@ case "$GROUP" in
     receiver)     wait_for_server; test_receiver_ops ;;
     admin)        wait_for_server; test_admin_all ;;
     close)        wait_for_server; close_connections ;;
-    all|"")       wait_for_server; test_admin_all; test_messages; test_schedule; test_receiver_ops; close_connections ;;
+    all|"")       wait_for_server; test_admin_all; test_messages; test_schedule; test_receiver_ops ;;
     *)
         echo -e "${RED}Unknown group: $GROUP${NC}"
         echo "Valid groups: topic, subscription, rule, queue, message, receiver, admin, close, all"
